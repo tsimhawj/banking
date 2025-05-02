@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
           {
               id: generateUUID(),
               question: {
-                  english: "account1",
-                  chinese: "test",
-                  laos: "test"
+                  english: "account",
+                  chinese: "",
+                  laos: ""
               },
               answer: {
-                  english: "11",
+                  english: "",
                   chinese: "帐户",
-                  laos: "11"
+                  laos: ""
               },
               questionAudio: {
                   english: null,
