@@ -48,7 +48,6 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s;
-  border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -62,7 +61,6 @@ body {
   height: 100%;
   backface-visibility: hidden;
   padding: 20px;
-  border-radius: 10px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -90,11 +88,14 @@ body {
   color: #6c757d;
   margin-bottom: 5px;
   font-weight: 300;
+  display: none;
 }
 
 .language-section p {
-  font-size: 20px;
+  font-family: "Noto Sans SC", sans-serif !important;
+  font-size: 30px;
   margin-bottom: 8px;
+  color: var(--link);
 }
 
 /* Audio controls */
@@ -174,7 +175,7 @@ body {
   }
   
   .language-section p {
-      font-size: 18px;
+    font-size: 30px;
   }
 }
 
@@ -184,10 +185,9 @@ body {
   }
   
   .language-section p {
-      font-size: 16px;
+      font-size: 30px;
   }
 }
-
 
 
 :root {
@@ -321,6 +321,10 @@ body {
       background-color: var(--clay);
   }
 
+  .blue {
+    background-color: var(--link);
+  }
+
   .sun-black {
       background-color: var(--sun-black);
   }
@@ -370,6 +374,10 @@ body {
 
   .text-sun-black {
       color: var(--sun-black);
+  }
+
+  .text-blue {
+    color: var(--link) !important;
   }
 
   /* Semantics */
