@@ -690,7 +690,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   
                   const audioBtn = document.createElement('button');
                   audioBtn.className = 'btn btn-sm btn-outline-secondary';
-                  audioBtn.innerHTML = '<span class="material-symbols-rounded">play</span> Play';
+                  audioBtn.innerHTML = '<span class="material-symbols-rounded fill">play_arrow</span> Play';
                   audioBtn.addEventListener('click', function(e) {
                       e.stopPropagation(); // Prevent card flip
                       playAudio(card.questionAudio[language]);
@@ -726,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   
                   const audioBtn = document.createElement('button');
                   audioBtn.className = 'btn btn-sm btn-outline-secondary';
-                  audioBtn.innerHTML = '<i class="bi bi-volume-up"></i> Play';
+                  audioBtn.innerHTML = '<span class="material-symbols-rounded fill">play_arrow</span> Play';
                   audioBtn.addEventListener('click', function(e) {
                       e.stopPropagation(); // Prevent card flip
                       playAudio(card.answerAudio[language]);
@@ -814,13 +814,13 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Audio controls
       const audioControls = document.createElement('div');
-      audioControls.className = 'd-flex align-items-center mb-3';
+      audioControls.className = 'd-flex align-items-center mb-5';
       
       // Record button
       const recordBtn = document.createElement('button');
       recordBtn.type = 'button';
-      recordBtn.className = 'btn btn-sm btn-light me-2 rounded-pill';
-      recordBtn.innerHTML = '<span class="material-symbols-rounded fs-20">mic</span> Record';
+      recordBtn.className = 'btn btn-sm btn-light me-2';
+      recordBtn.innerHTML = '<span class="material-symbols-rounded fs-20">mic</span><br>Record';
       recordBtn.addEventListener('click', function() {
           startRecording(language, type);
       });
@@ -828,8 +828,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Upload button
       const uploadBtn = document.createElement('button');
       uploadBtn.type = 'button';
-      uploadBtn.className = 'btn btn-sm btn-light me-2 rounded-pill';
-      uploadBtn.innerHTML = '<span class="material-symbols-rounded fs-20">upload</span> Upload';
+      uploadBtn.className = 'btn btn-sm btn-light me-2';
+      uploadBtn.innerHTML = '<span class="material-symbols-rounded fs-20">upload</span><br>Upload';
       uploadBtn.addEventListener('click', function() {
           uploadAudio(language, type);
       });
@@ -837,8 +837,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // URL button
       const urlBtn = document.createElement('button');
       urlBtn.type = 'button';
-      urlBtn.className = 'btn btn-sm btn-light me-2 rounded-pill';
-      urlBtn.innerHTML = '<span class="material-symbols-rounded fs-20">link</span> URL';
+      urlBtn.className = 'btn btn-sm btn-light me-2';
+      urlBtn.innerHTML = '<span class="material-symbols-rounded fs-20">link</span><br>URL';
       urlBtn.addEventListener('click', function() {
           addAudioURL(language, type);
       });
@@ -851,16 +851,16 @@ document.addEventListener('DOMContentLoaded', function() {
       if (audio) {
           const playBtn = document.createElement('button');
           playBtn.type = 'button';
-          playBtn.className = 'btn btn-sm btn-outline-success me-2';
-          playBtn.innerHTML = '<span class="material-symbols-rounded fs-20">play</span> Play';
+          playBtn.className = 'btn btn-sm btn-light me-2';
+          playBtn.innerHTML = '<span class="material-symbols-rounded fill fs-20">play_arrow</span><br>Play';
           playBtn.addEventListener('click', function() {
               playAudio(audio);
           });
           
           const removeBtn = document.createElement('button');
           removeBtn.type = 'button';
-          removeBtn.className = 'btn btn-sm btn-outline-danger';
-          removeBtn.innerHTML = '<span class="material-symbols-rounded fs-20">delete</span> Remove';
+          removeBtn.className = 'btn btn-sm btn-light';
+          removeBtn.innerHTML = '<span class="material-symbols-rounded fs-20">delete</span><br>Remove';
           removeBtn.addEventListener('click', function() {
               removeAudio(language, type);
           });
@@ -909,6 +909,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show recording modal
       const recordingModal = new bootstrap.Modal(document.getElementById('recordingModal'));
       recordingModal.show();
+
       
       // Setup recording UI
       const recordButton = document.getElementById('recordButton');
@@ -920,7 +921,7 @@ document.addEventListener('DOMContentLoaded', function() {
       recordingStatus.textContent = 'Press the button to start recording';
       recordingTimer.classList.add('d-none');
       recordingControls.classList.add('d-none');
-      recordButton.innerHTML = '<i class="bi bi-mic-fill"></i> Record';
+      recordButton.innerHTML = '<span class="material-symbols-rounded fill">mic</span> Record';
       
       // Store recording target
       APP_STATE.currentRecordingTarget = { language, type };
@@ -962,7 +963,7 @@ document.addEventListener('DOMContentLoaded', function() {
                       // Update UI
                       recordingStatus.textContent = 'Recording complete';
                       recordingControls.classList.remove('d-none');
-                      recordButton.innerHTML = '<i class="bi bi-mic-fill"></i> Record Again';
+                      recordButton.innerHTML = '<span class="material-symbols-rounded fill">mic</span> Record Again';
                       APP_STATE.isRecording = false;
                       clearInterval(APP_STATE.recordingTimerInterval);
                   });
@@ -973,7 +974,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   
                   // Update UI
                   recordingStatus.textContent = 'Recording...';
-                  recordButton.innerHTML = '<i class="bi bi-stop-fill"></i> Stop';
+                  recordButton.innerHTML = '<span class="material-symbols-rounded fill">stop</span> Stop';
                   recordingTimer.classList.remove('d-none');
                   
                   // Setup timer
@@ -1288,7 +1289,7 @@ function editCards(deckIndex) {
     const deck = APP_STATE.decks[deckIndex];
     
     // Update UI
-    document.getElementById('cardEditDeckName').textContent = `Edit Cards - ${deck.name}`;
+    document.getElementById('cardEditDeckName').innerHTML =  `<span class="fw-light">Edit <span class="material-symbols-rounded">edit</span></span> - ${deck.name}`;
     document.getElementById('totalEditCards').textContent = deck.cards.length;
     updateCardEditForm();
     
