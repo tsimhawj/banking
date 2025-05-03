@@ -112,6 +112,10 @@ body {
   height: 5px;
 }
 
+.progress-bar {
+  background-color: var(--link) !important;
+}
+
 /* Deck cards */
 .deck-card {
   transition: transform 0.2s;
@@ -136,6 +140,8 @@ body {
 .language-toggle-btn.active {
   opacity: 1;
 }
+
+
 
 /* Recording indicator */
 .recording-indicator {
