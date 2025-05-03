@@ -659,14 +659,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Update card content in study mode
   function updateCardContent() {
-      const deck = APP_STATE.decks[APP_STATE.currentDeckIndex];
-      const card = deck.cards[APP_STATE.currentCardIndex];
-      const cardFront = document.getElementById('cardFront');
-      const cardBack = document.getElementById('cardBack');
-      
-      // Clear previous content
-      cardFront.innerHTML = '';
-      cardBack.innerHTML = '';
+    const deck = APP_STATE.decks[APP_STATE.currentDeckIndex];
+    
+    // Get the actual card index based on whether we're using shuffled order
+    let actualCardIndex = APP_STATE.currentCardIndex;
+    if (APP_STATE.cardOrder && APP_STATE.cardOrder.length > 0) {
+        actualCardIndex = APP_STATE.cardOrder[APP_STATE.currentCardIndex];
+    }
+    
+    const card = deck.cards[actualCardIndex];
+    
+    const cardFront = document.getElementById('cardFront');
+    const cardBack = document.getElementById('cardBack');
+    
+    // Clear previous content
+    cardFront.innerHTML = '';
+    cardBack.innerHTML = '';
       
       // Add question content (front of card)
       deck.languages.forEach(language => {
@@ -831,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Upload button
       const uploadBtn = document.createElement('button');
       uploadBtn.type = 'button';
-      uploadBtn.className = 'btn btn-sm btn-light me-2 hidden';
+      uploadBtn.className = 'btn btn-sm btn-light me-2';
       uploadBtn.innerHTML = '<span class="material-symbols-rounded fs-20">upload</span><br>Upload';
       uploadBtn.addEventListener('click', function() {
           uploadAudio(language, type);
@@ -840,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // URL button
       const urlBtn = document.createElement('button');
       urlBtn.type = 'button';
-      urlBtn.className = 'btn btn-sm btn-light me-2';
+      urlBtn.className = 'btn btn-sm btn-light me-2 hidden';
       urlBtn.innerHTML = '<span class="material-symbols-rounded fs-20">link</span><br>URL';
       urlBtn.addEventListener('click', function() {
           addAudioURL(language, type);
@@ -1256,7 +1264,11 @@ function saveDeckSettings() {
 function startStudyingDeck(deckIndex) {
     APP_STATE.currentDeckIndex = deckIndex;
     APP_STATE.currentCardIndex = 0;
+    
+    // Initialize card order to be sequential (no shuffle)
     const deck = APP_STATE.decks[deckIndex];
+    APP_STATE.cardOrder = Array.from({ length: deck.cards.length }, (_, i) => i);
+
     
     // Reset card flip
     flashcard.classList.remove('flipped');
@@ -1292,7 +1304,7 @@ function editCards(deckIndex) {
     const deck = APP_STATE.decks[deckIndex];
     
     // Update UI
-    document.getElementById('cardEditDeckName').innerHTML =  `<span class="fw-light">Edit <span class="material-symbols-rounded">edit</span></span> - ${deck.name}`;
+    document.getElementById('cardEditDeckName').innerHTML =  `<span class="fw-light">Edit</span> - ${deck.name}`;
     document.getElementById('totalEditCards').textContent = deck.cards.length;
     updateCardEditForm();
     
@@ -1556,10 +1568,10 @@ function updateProgressBar() {
 
 // Update navigation buttons state
 function updateNavButtons() {
-    const deck = APP_STATE.decks[APP_STATE.currentDeckIndex];
+    // const deck = APP_STATE.decks[APP_STATE.currentDeckIndex];
     
     prevCardBtn.disabled = APP_STATE.currentCardIndex === 0;
-    nextCardBtn.disabled = APP_STATE.currentCardIndex === deck.cards.length - 1;
+    nextCardBtn.disabled = APP_STATE.currentCardIndex >= APP_STATE.cardOrder.length - 1;
 }
 
 // Event Listeners
@@ -1647,6 +1659,8 @@ languageToggles.forEach(toggle => {
     });
 });
 
+document.getElementById('shuffleCardsBtn').addEventListener('click', shuffleCards);
+
 // Touch swipe functionality for card navigation
 let touchStartX = 0;
 let touchEndX = 0;
@@ -1664,11 +1678,15 @@ function handleSwipe() {
     const swipeThreshold = 50;
     if (touchEndX < touchStartX - swipeThreshold) {
         // Swipe left - go to next card
-        nextCardBtn.click();
+        if (APP_STATE.currentCardIndex < APP_STATE.cardOrder.length - 1) {
+            nextCardBtn.click();
+        }
     }
     if (touchEndX > touchStartX + swipeThreshold) {
         // Swipe right - go to previous card
-        prevCardBtn.click();
+        if (APP_STATE.currentCardIndex > 0) {
+            prevCardBtn.click();
+        }
     }
 }
 
@@ -1775,6 +1793,57 @@ function renameDeck() {
       showToast('Error', 'Deck name cannot be empty', '❌');
   }
 }
+
+
+// Shuffle array using Fisher-Yates algorithm
+function shuffleArray(array) {
+    // Create a copy of the array to avoid modifying the original
+    const shuffled = [...array];
+    
+    // Fisher-Yates shuffle
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        // Pick a random index from 0 to i
+        const j = Math.floor(Math.random() * (i + 1));
+        
+        // Swap elements at i and j
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    
+    return shuffled;
+}
+
+
+// Add a new property to APP_STATE to track card order
+// Add this to your APP_STATE object initialization:
+// cardOrder: [], // Will store the shuffled order of cards
+
+function shuffleCards() {
+    const deck = APP_STATE.decks[APP_STATE.currentDeckIndex];
+    
+    // Get array of indices (0 to number of cards - 1)
+    const indices = Array.from({ length: deck.cards.length }, (_, i) => i);
+    
+    // Shuffle the indices
+    APP_STATE.cardOrder = shuffleArray(indices);
+    
+    // Reset to first card in shuffled order
+    APP_STATE.currentCardIndex = 0;
+    
+    // Update UI
+    flashcard.classList.remove('flipped');
+    currentCardEl.textContent = APP_STATE.currentCardIndex + 1;
+    
+    // Ensure these functions are called with the updated state
+    updateCardContent();
+    updateProgressBar();
+    updateNavButtons();
+    
+    // Log the shuffle for debugging
+    console.log("Cards shuffled. New order:", APP_STATE.cardOrder);
+    
+    showToast('Success', 'Cards shuffled', '🔀');
+}
+
 
 
 // Initialize the app when DOM is loaded
