@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function() {
               const deckCard = document.createElement('div');
               deckCard.className = 'col';
               deckCard.innerHTML = `
-                  <div class="card h-100 deck-card rounded-3 p-2">
+                  <div class="card h-100 deck-card rounded-4 p-2">
                       <div class="card-body">
                           <h5 class="card-title">${deck.name}</h5>
                           <p class="card-text fs-14 text-brown fw-normal">${deck.cards.length} cards</p>
@@ -637,8 +637,8 @@ document.addEventListener('DOMContentLoaded', function() {
                       </div>
                       <div class="card-footer bg-transparent">
                           <div class="d-flex justify-content-between">
-                              <button class="btn btn-sm btn-primary study-deck-btn rounded-pill" data-deck-index="${index}">Study</button>
-                              <button class="btn btn-sm btn-outline-dark edit-deck-btn rounded-pill" data-deck-index="${index}"><span class="material-symbols-rounded fs-17">edit</span> Edit</button>
+                              <button class="btn btn-sm btn-primary study-deck-btn rounded-pill stretched-link" data-deck-index="${index}">Study</button>
+                              <button class="btn btn-sm btn-outline-dark edit-deck-btn rounded-pill hidden" data-deck-index="${index}"><span class="material-symbols-rounded fs-17">edit</span> Edit</button>
                           </div>
                       </div>
                   </div>
@@ -672,12 +672,13 @@ document.addEventListener('DOMContentLoaded', function() {
       deck.languages.forEach(language => {
           if (APP_STATE.activeLanguages[language] && card.question[language]) {
               const section = document.createElement('div');
-              section.className = 'language-section text-black fw-bold fs-30';
+              section.className = 'language-section';
               
               const heading = document.createElement('h3');
               heading.textContent = language.charAt(0).toUpperCase() + language.slice(1);
               
               const content = document.createElement('p');
+              content.className = 'text-black fw-bold fs-30';
               content.textContent = card.question[language];
               
               section.appendChild(heading);
@@ -689,8 +690,8 @@ document.addEventListener('DOMContentLoaded', function() {
                   audioControl.className = 'audio-control';
                   
                   const audioBtn = document.createElement('button');
-                  audioBtn.className = 'btn btn-sm btn-outline-secondary';
-                  audioBtn.innerHTML = '<span class="material-symbols-rounded fill">play_arrow</span> Play';
+                  audioBtn.className = 'btn btn-sm btn-outline-dark rounded-pill';
+                  audioBtn.innerHTML = '<span class="material-symbols-rounded fill">volume_mute</span>';
                   audioBtn.addEventListener('click', function(e) {
                       e.stopPropagation(); // Prevent card flip
                       playAudio(card.questionAudio[language]);
@@ -714,6 +715,8 @@ document.addEventListener('DOMContentLoaded', function() {
               heading.textContent = language.charAt(0).toUpperCase() + language.slice(1);
               
               const content = document.createElement('p');
+              content.className = 'text-black fw-bold fs-30 text-blue';
+
               content.textContent = card.answer[language];
               
               section.appendChild(heading);
@@ -828,7 +831,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Upload button
       const uploadBtn = document.createElement('button');
       uploadBtn.type = 'button';
-      uploadBtn.className = 'btn btn-sm btn-light me-2';
+      uploadBtn.className = 'btn btn-sm btn-light me-2 hidden';
       uploadBtn.innerHTML = '<span class="material-symbols-rounded fs-20">upload</span><br>Upload';
       uploadBtn.addEventListener('click', function() {
           uploadAudio(language, type);
