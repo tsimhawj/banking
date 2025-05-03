@@ -23,24 +23,24 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app.css">
 </head>
-<body class="paper-warm">
+<body class="paper-warm p-0">
     <div class="container">
         <!-- Toast for notifications -->
-        <div class="toast-container position-fixed top-0 end-0 p-3">
-            <div id="saveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
+        <div class="toast-container bottom-0 start-50 translate-middle-x mb-3">
+            <div id="saveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1500">
+                <div class="toast-header hidden">
                     <div class="rounded me-2" id="toastIcon">📝</div>
                     <strong class="me-auto" id="toastTitle">Saved</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="toast-body" id="toastMessage">
+                <div class="toast-body text-center" id="toastMessage">
                     Changes saved successfully.
                 </div>
             </div>
         </div>
 
         <!-- Deck Selection Screen (initial view) -->
-        <div id="deckSelectionScreen" class="container">
+        <div id="deckSelectionScreen" class="container mt-lg-2 mt-4">
             <div class="row align-items-center">
               <div class="col-lg-10 col-md-12 mx-auto">
                 <div class="row p-0 align-items-center">
@@ -77,7 +77,7 @@
         </div>
 
         <!-- Deck Creation/Edit Screen -->
-        <div id="deckEditScreen" class="container hidden">
+        <div id="deckEditScreen" class="container mt-4 hidden">
             <div class="row mb-4">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -112,8 +112,8 @@
                         </div>
                         
                         <div class="d-flex justify-content-between pt-4">
-                            <button type="button" class="btn btn-outline-dark" id="backToDeckListBtn">Cancel</button>
-                            <button type="submit" class="btn btn-dark">Continue</button>
+                            <button type="button" class="btn btn-outline-dark rounded-pill" id="backToDeckListBtn"><span class="material-symbols-rounded fs-20">close</span> Cancel</button>
+                            <button type="submit" class="btn btn-dark rounded-pill">Continue <span class="material-symbols-rounded fs-20">east</span></button>
                         </div>
                     </form>
                 </div>
@@ -121,15 +121,15 @@
         </div>
 
         <!-- Card Edit Screen -->
-        <div id="cardEditScreen" class="container hidden">
+        <div id="cardEditScreen" class="container mt-4 hidden">
             <div class="row pb-4 justify-content-center align-items-center">
                 <div class="col-lg-4 col-6 p-0">
-                    <button id="backToDeckBtn" class="btn rounded-pill"><span class="material-symbols-rounded fs-17">west</span> Back</button>
+                    <button id="backToDeckBtn" class="btn rounded-pill"><span class="material-symbols-rounded fs-17">west</span> Back home</button>
                 </div>
                 <div class="col-lg-6 col-6 text-end">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Options
+                          More
                         </button>
                         <ul class="dropdown-menu">
                           <li><a id="renameDeckBtn" class="dropdown-item" href="#">Rename</a></li>
@@ -200,6 +200,9 @@
 
         <!-- Study Screen -->
         <div id="studyScreen" class="container hidden">
+            <div class="text-center">
+                <span id="studyDeckName" class="fs-14">Deck Name</span>
+            </div>
             <div class="row mb-4">
                 <div class="col-lg-8 col-md-10 mx-auto p-0">
                     <div class="row pb-0">
@@ -214,12 +217,20 @@
                     </div>
                     <div class="row">
                       <div class="col-9">
-                        <h2 id="studyDeckName" class="fs-20 fw-normal">Deck Name</h2>
+                        <button id="backToDecksBtn" class="btn rounded-pill" style="margin-left: -10px;">
+                            <span class="material-symbols-rounded">west</span> Back home
+                        </button>
                       </div>
                       <div class="col-3 text-end">
-                        <a id="editDeckBtn" class="rounded-pill ms-2 btn-sm dark pointer">
-                          Edit<span class="material-symbols-rounded fs-17">edit</span>
-                        </a>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              More
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a id="shuffleCardsBtn" class="dropdown-item" href="#"><span class="material-symbols-rounded">shuffle</span> Shuffle</a></li>
+                              <li><a id="editDeckBtn" class="dropdown-item" href="#"><span class="material-symbols-rounded">edit</span> Edit deck</a></li>
+                            </ul>
+                        </div>
                       </div>
                     </div>
                     <div class="spacer-xs"></div>
@@ -245,21 +256,13 @@
                                 <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
                             </div>
                             <small>Card <span id="currentCard">1</span> of <span id="totalCards">0</span></small>
+                            
                         </div>
                         <button id="nextCardBtn" class="btn btn-lg btn-outline-dark rounded-pill">
                             Next <span class="material-symbols-rounded">east</span>
                         </button>
                     </div>
                     
-                    <div class="swipe-hint mt-4">
-                        <i class="bi bi-info-circle"></i> Tap card to flip | Swipe left/right to navigate
-                    </div>
-                    
-                    <div class="text-center mt-4">
-                        <button id="backToDecksBtn" class="btn rounded-pill">
-                            <i class="bi bi-arrow-left"></i> Back to Decks
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
