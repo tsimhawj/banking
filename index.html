@@ -122,10 +122,23 @@
 
         <!-- Card Edit Screen -->
         <div id="cardEditScreen" class="container hidden">
-            <div class="row pb-4">
-              <div class="col-lg-10 mx-auto">
-                <button id="backToDeckBtn" class="btn btn-outline-dark rounded-pill"><span class="material-symbols-rounded fs-17">west</span> Back</button>
-              </div>
+            <div class="row pb-4 justify-content-center align-items-center">
+                <div class="col-lg-4 col-6 p-0">
+                    <button id="backToDeckBtn" class="btn rounded-pill"><span class="material-symbols-rounded fs-17">west</span> Back</button>
+                </div>
+                <div class="col-lg-6 col-6 text-end">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Options
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a id="renameDeckBtn" class="dropdown-item" href="#">Rename</a></li>
+                          <li><a id="exportDeckBtn" class="dropdown-item" href="#">Export</a></li>
+                          <li><a id="clearAudioBtn"class="dropdown-item" href="#">Delete all audio</a></li>
+                          <li><a id="deleteDeckBtn"class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="row mb-4">
                 <div class="col-lg-10 mx-auto">
@@ -135,16 +148,7 @@
                             <small class="text-muted">Saving...</small>
                         </div>
                     </div>
-                    <div class="row p-0">
-                      <div class="col p-0">
-                        <div class="d-flex align-items-center mb-5">
-                            <button id="renameDeckBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Rename</a>
-                            <button id="exportDeckBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Export</a>
-                            <button id="clearAudioBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Delete Audio</a>
-                            <button id="deleteDeckBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Delete</a>
-                        </div>
-                      </div>
-                    </div>
+                    
                     
                     <div class="container p-0">
                       <div class="row p-0">
@@ -172,12 +176,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4>Question</h4>
+                                        <div class="spacer-sm"></div>
                                         <div id="questionLangSections">
                                             <!-- Language sections will be inserted here -->
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <h4>Answer</h4>
+                                        <div class="spacer-sm"></div>
                                         <div id="answerLangSections">
                                             <!-- Language sections will be inserted here -->
                                         </div>
@@ -196,9 +202,9 @@
         <div id="studyScreen" class="container hidden">
             <div class="row mb-4">
                 <div class="col-lg-8 col-md-10 mx-auto p-0">
-                    <div class="row pb-4">
+                    <div class="row pb-0">
                       <div class="col text-end">
-                        <div class="" role="group">
+                        <div class="hidden" role="group">
                           <button type="button" class="btn btn-sm rounded-pill language-toggle-btn active" data-language="english">English</button>
                           <button type="button" class="btn btn-sm rounded-pill language-toggle-btn active" data-language="chinese">Chinese</button>
                           <button type="button" class="btn btn-sm rounded-pill language-toggle-btn active" data-language="laos">Laos</button>
@@ -212,19 +218,19 @@
                       </div>
                       <div class="col-3 text-end">
                         <a id="editDeckBtn" class="rounded-pill ms-2 btn-sm dark pointer">
-                          Edit <span class="material-symbols-rounded fs-17">edit</span>
+                          Edit<span class="material-symbols-rounded fs-17">edit</span>
                         </a>
                       </div>
                     </div>
                     <div class="spacer-xs"></div>
                   
                     
-                    <div class="flashcard-container rounded-4">
-                        <div class="flashcard">
-                            <div class="flashcard-front text-center" id="cardFront">
+                    <div class="flashcard-container ">
+                        <div class="flashcard rounded-4">
+                            <div class="flashcard-front text-center rounded-4" id="cardFront">
                                 <!-- Question content will be added here -->
                             </div>
-                            <div class="flashcard-back text-center" id="cardBack">
+                            <div class="flashcard-back text-center rounded-4" id="cardBack">
                                 <!-- Answer content will be added here -->
                             </div>
                         </div>
@@ -245,12 +251,12 @@
                         </button>
                     </div>
                     
-                    <div class="swipe-hint mt-5">
+                    <div class="swipe-hint mt-4">
                         <i class="bi bi-info-circle"></i> Tap card to flip | Swipe left/right to navigate
                     </div>
                     
                     <div class="text-center mt-4">
-                        <button id="backToDecksBtn" class="btn btn-outline-dark rounded-pill">
+                        <button id="backToDecksBtn" class="btn rounded-pill">
                             <i class="bi bi-arrow-left"></i> Back to Decks
                         </button>
                     </div>
