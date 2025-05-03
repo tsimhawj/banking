@@ -137,13 +137,14 @@
                     </div>
                     <div class="row p-0">
                       <div class="col p-0">
-                          <button id="renameDeckBtn" class="btn btn-sm rounded-pill ms-2 dark no-underline">Rename</a>
-                          <button id="exportDeckBtn" class="btn btn-sm rounded-pill ms-2 dark no-underline">Export</a>
-                          <button id="clearAudioBtn" class="btn btn-sm rounded-pill ms-2 dark no-underline">Clear Audio Files</a>
-                          <button id="deleteDeckBtn" class="btn btn-sm rounded-pill ms-2 dark no-underline">Delete</a>
+                        <div class="d-flex align-items-center mb-5">
+                            <button id="renameDeckBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Rename</a>
+                            <button id="exportDeckBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Export</a>
+                            <button id="clearAudioBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Delete Audio</a>
+                            <button id="deleteDeckBtn" class="btn btn-sm btn-outline-dark rounded-pill ms-2 dark no-underline">Delete</a>
+                        </div>
                       </div>
                     </div>
-                    <div class="spacer-sm"></div>
                     
                     <div class="container p-0">
                       <div class="row p-0">
@@ -162,7 +163,7 @@
                             </div>
                             <div>
                                 <button id="prevEditCardBtn" class="btn btn-sm btn-outline-dark">Previous</button>
-                                <button id="nextEditCardBtn" class="btn btn-sm btn-outline-dark ms-2">Next</button>
+                                <button id="nextEditCardBtn" class="btn btn-sm btn-dark ms-2">Next</button>
                                 
                             </div>
                         </div>
@@ -300,6 +301,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col">
+                              <span id="recordNameLabel"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="spacer-sm"></div>
+
                         <div id="recordingStatus" class="mb-3">Press the button to start recording</div>
                         <button id="recordButton" class="btn btn-danger rounded-pill btn-lg mb-3">
                           <span class="material-symbols-rounded fs-20">mic</span> Record
@@ -307,7 +317,7 @@
                         <div id="recordingTimer" class="mb-3 d-none">00:00</div>
                         <div id="recordingControls" class="d-none">
                             <button id="playRecordingBtn" class="btn btn-primary me-2">
-                              <span class="material-symbols-rounded fs-20">play</span> Play
+                              <span class="material-symbols-rounded fs-20 fill">play_arrow</span> Play
                             </button>
                             <button id="saveRecordingBtn" class="btn btn-success me-2">
                               <span class="material-symbols-rounded fs-20">check</span> Use
